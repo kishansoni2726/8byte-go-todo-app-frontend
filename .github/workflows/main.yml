@@ -97,4 +97,4 @@ jobs:
         git add .
         git commit -m "Update backend image to ${GITHUB_SHA}" || echo "No changes to commit"
         echo ${PAT}
-        git push -f https://kishansoni2726:${PAT}@github.com/kishansoni2726/8byte-go-todo-app-k8s.git master
+        git push -f https://kishansoni2726:"${PAT}"@github.com/kishansoni2726/8byte-go-todo-app-k8s.git master
