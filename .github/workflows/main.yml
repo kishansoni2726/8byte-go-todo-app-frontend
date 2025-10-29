@@ -96,4 +96,4 @@ jobs:
         git config user.name "kishansoni2726"
         git add .
         git commit -m "Update backend image to ${GITHUB_SHA}"
-        git push https://x-access-token:${GITHUB_TOKEN}@github.com/kishansoni2726/8byte-go-todo-app-k8s.git master
+        git push https://x-access-token:${{ secrets.K8S_REPO_PAT }}@github.com/kishansoni2726/8byte-go-todo-app-k8s.git master
