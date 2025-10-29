@@ -84,6 +84,7 @@ jobs:
     - name: Update Kubernetes Image Tag
       run: |
         cd 8byte-go-todo-app-k8s
+        git remote -v
         sed -i "s|image:.*|image: ${ECR_REGISTRY}/${ECR_REPOSITORY}:${GITHUB_SHA}|" backend-deploy.yaml
     
     - name: Commit Manifest Changes
