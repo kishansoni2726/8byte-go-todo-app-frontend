@@ -78,7 +78,7 @@ jobs:
 
     - name: Clone Kubernetes Repo
       run: |
-        git clone https://github.com/kishansoni2726/8byte-go-todo-app-frontend.git
+        git clone https://github.com/kishansoni2726/8byte-go-todo-app-k8s.git
         ls -la
         cd 8byte-go-todo-app-k8s
         git checkout master
