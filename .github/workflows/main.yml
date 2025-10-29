@@ -80,7 +80,7 @@ jobs:
       run: |
         git clone https://github.com/kishansoni2726/8byte-go-todo-app-k8s.git
         cd 8byte-go-todo-app-k8s
-        git checkout main
+        git checkout master
 
     - name: Update Kubernetes Image Tag
       run: |
@@ -94,4 +94,4 @@ jobs:
         git config user.name "Kishan Lalvadiya"
         git add .
         git commit -m "Update backend image to ${GITHUB_SHA}"
-        git push
+        git push --set-upstream origin main
