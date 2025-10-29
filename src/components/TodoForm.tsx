@@ -19,6 +19,7 @@ const TodoForm = () => {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
+                        "X-Frontend-Auth": "trusted"
                     },
                     body: JSON.stringify({ body: newTodo }),
 
