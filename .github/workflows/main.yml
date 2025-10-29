@@ -86,11 +86,12 @@ jobs:
         cd 8byte-go-todo-app-k8s
         git remote -v
         sed -i "s|image:.*|image: ${ECR_REGISTRY}/${ECR_REPOSITORY}:${GITHUB_SHA}|" frontend-deploy.yaml
-
+    
     - name: Check PAT length
-      run: echo "PAT length: ${#PAT}"
+      run: |
+        echo "PAT length: ${#PAT}"
       env:
-        PAT: ${{ secrets.K8S_REPO_PAT }}
+          PAT: ${{ secrets.K8S_REPO_PAT }}
 
     - name: Commit Manifest Changes
       run: |
