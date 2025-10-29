@@ -86,21 +86,34 @@ jobs:
         cd 8byte-go-todo-app-k8s
         git remote -v
         sed -i "s|image:.*|image: ${ECR_REGISTRY}/${ECR_REPOSITORY}:${GITHUB_SHA}|" frontend-deploy.yaml
-    
+
+    - name: Check PAT length
+      run: echo "PAT length: ${#PAT}"
+      env:
+        PAT: ${{ secrets.K8S_REPO_PAT }}
+
     - name: Commit Manifest Changes
       run: |
-          cd 8byte-go-todo-app-k8s
+        cd 8byte-go-todo-app-k8s
     
-          # Configure git
-          git config user.email "kishansoni45285@gmail.com"
-          git config user.name "kishansoni2726"
-          
-          # Set remote with PAT
-          git remote set-url origin "https://x-access-token:${PAT}@github.com/kishansoni2726/8byte-go-todo-app-k8s.git"
-          
-          # Commit and push
-          git add -deploy.yaml
-          git commit -m "Update backend image to ${GITHUB_SHA}" || echo "No changes"
-          git push origin master
+        # Safe directory fix
+        git config --global --add safe.directory $(pwd)
+    
+        # Configure git identity
+        git config user.email "kishansoni45285@gmail.com"
+        git config user.name "kishansoni2726"
+    
+        # Ensure remote points to authenticated GitHub URL
+        git remote remove origin || true
+        git remote add origin "https://x-access-token:${PAT}@github.com/kishansoni2726/8byte-go-todo-app-k8s.git"
+    
+        # Add updated manifest
+        git add frontend-deploy.yaml
+    
+        # Commit changes if any exist
+        git commit -m "Update backend image to ${GITHUB_SHA}" || echo "No changes to commit"
+    
+        # Push to master
+        git push origin master
       env:
         PAT: ${{ secrets.K8S_REPO_PAT }}
