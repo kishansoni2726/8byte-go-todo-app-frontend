@@ -87,7 +87,7 @@ jobs:
       run: |
         cd 8byte-go-todo-app-k8s
         ls -la
-        sed -i "s|image: .*|image: $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG|" backend-deploy.yaml
+        sed -i "s|image: .*|image: $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG|" k8s/backend-deploy.yaml
 
     - name: Commit Manifest Changes
       run: |
@@ -96,4 +96,4 @@ jobs:
         git config user.name "Kishan Lalvadiya"
         git add .
         git commit -m "Update backend image to ${GITHUB_SHA}"
-        git push --set-upstream origin main
+        git push origin master
