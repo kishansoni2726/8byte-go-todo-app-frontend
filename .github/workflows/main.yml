@@ -93,7 +93,7 @@ jobs:
       run: |
         cd 8byte-go-todo-app-k8s
         git config user.email "kishansoni45285@gmail.com"
-        git config user.name "Kishan Lalvadiya"
+        git config user.name "kishansoni2726"
         git add .
         git commit -m "Update backend image to ${GITHUB_SHA}"
         git push origin master
