@@ -43,8 +43,8 @@ jobs:
     env:
       ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
       ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
-      AWS_REGION: ${{ secrets.AWS_REGION }}
-      IMAGE_TAG: latest
+      AWS_REGION: ${{ secrets.AWS_REGION }} 
+      PAT: ${{ secrets.K8S_REPO_PAT }}
       
     steps:
 
@@ -90,10 +90,11 @@ jobs:
         sed -i "s|image: .*|image: $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG|" backend-deploy.yaml
 
     - name: Commit Manifest Changes
+    
       run: |
         cd 8byte-go-todo-app-k8s
         git config user.email "kishansoni45285@gmail.com"
         git config user.name "kishansoni2726"
         git add .
         git commit -m "Update backend image to ${GITHUB_SHA}"
-        git push https://x-access-token:${{ secrets.K8S_REPO_PAT }}@github.com/kishansoni2726/8byte-go-todo-app-k8s.git master
+        git push https://x-access-token:${PAT}@github.com/kishansoni2726/8byte-go-todo-app-k8s.git master
