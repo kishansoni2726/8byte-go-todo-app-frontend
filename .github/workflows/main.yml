@@ -88,13 +88,8 @@ jobs:
         sed -i "s|image:.*|image: ${ECR_REGISTRY}/${ECR_REPOSITORY}:${GITHUB_SHA}|" backend-deploy.yaml
     
     - name: Commit Manifest Changes
-      env:
-        PAT: ${{ secrets.K8S_REPO_PAT }}
       run: |
         cd 8byte-go-todo-app-k8s
-        git config user.email "kishansoni45285@gmail.com"
-        git config user.name "kishansoni2726"
         git add .
         git commit -m "Update backend image to ${GITHUB_SHA}" || echo "No changes to commit"
-        echo ${PAT}
-        git push -f https://kishansoni2726:"${PAT}"@github.com/kishansoni2726/8byte-go-todo-app-k8s.git master
+        git push 
