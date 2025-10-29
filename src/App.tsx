@@ -5,7 +5,7 @@ import TodoForm from './components/TodoForm'
 import TodoList from './components/TodoList'
 import React from 'react';
 
-export const BASE_URL = "/api";
+export const BASE_URL = "http://go-todo-app-backend-service:80/api";
 
 function App() {
   return (
