@@ -97,6 +97,5 @@ jobs:
         git config user.name "kishansoni2726"
         git add .
         git commit -m "Update backend image to ${GITHUB_SHA}"
-        git remote set-url origin https://x-access-token:$PAT@github.com/kishansoni2726/8byte-go-todo-app-k8s.git
-        git push origin master
+        git push https://kishansoni2726:$PAT@github.com/kishansoni27268byte-go-todo-app-k8s.git master
 
