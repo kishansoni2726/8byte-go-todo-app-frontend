@@ -79,13 +79,15 @@ jobs:
     - name: Clone Kubernetes Repo
       run: |
         git clone https://github.com/kishansoni2726/8byte-go-todo-app-k8s.git
+        ls -la
         cd 8byte-go-todo-app-k8s
         git checkout master
 
     - name: Update Kubernetes Image Tag
       run: |
         cd 8byte-go-todo-app-k8s
-        sed -i "s|image: .*|image: $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG|" backend-deployment.yaml
+        ls -la
+        sed -i "s|image: .*|image: $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG|" backend-deploy.yaml
 
     - name: Commit Manifest Changes
       run: |
