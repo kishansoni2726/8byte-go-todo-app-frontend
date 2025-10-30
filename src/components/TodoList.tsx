@@ -5,30 +5,32 @@ import { useQuery } from "@tanstack/react-query";
 import { BASE_URL } from "../App";
 
 export type Todo = {
-    _id: string,
-    body: string,
-    completed: boolean
+	_id: string,
+	body: string,
+	completed: boolean
 };
 
 const TodoList = () => {
-	const {data:todos,isLoading} = useQuery <Todo[]>({
-        queryKey:["todos"],
+	const { data: todos, isLoading } = useQuery<Todo[]>({
+		queryKey: ["todos"],
 
-        queryFn: async() =>{
-            try {
-				const res = await fetch(BASE_URL + "/todos")
+		queryFn: async () => {
+			try {
+				const res = await fetch(BASE_URL + "/todos", {
+					headers: { "X-Frontend-Auth": "trusted" },
+				});
 				const data = await res.json()
-    
-            if (!res.ok){
-                throw new Error(data.error || "Something Went wrong")
-            }
-            return data || []
-        }
-            catch (error) {
-                
-            }
-        } 
-    })
+
+				if (!res.ok) {
+					throw new Error(data.error || "Something Went wrong")
+				}
+				return data || []
+			}
+			catch (error) {
+
+			}
+		}
+	})
 	return (
 		<>
 			<Text fontSize={"4xl"} textTransform={"uppercase"} fontWeight={"bold"} textAlign={"center"} my={2}>

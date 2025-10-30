@@ -14,7 +14,9 @@ const TodoItem = ({ todo }: { todo: any }) => {
             if (todo.completed) return alert("Todo already Completed")
                 try {
                     const res = await fetch(BASE_URL + `/todos/${todo._id}`,{
-                        method: "PATCH"
+                        method: "PATCH",
+                        headers: { "X-Frontend-Auth": "trusted" }
+
                     })
 
                     const data = await res.json()
@@ -39,7 +41,9 @@ const TodoItem = ({ todo }: { todo: any }) => {
         mutationFn: async() => {
                 try {
                     const res = await fetch(BASE_URL + `/todos/${todo._id}`,{
-                        method: "delete"
+                        method: "delete",
+                          headers: { "X-Frontend-Auth": "trusted" }
+
                     })
 
                     const data = await res.json()
